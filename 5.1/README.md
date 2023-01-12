@@ -12,3 +12,14 @@ away” or “later before the coupon expires” are labeled as “Y =
 “Y = 0”. There are five different types of coupons—less expensive
 restaurants (under $20), coffee houses, carry out and take away, bars,
 and more expensive restaurants ($20–$50).
+
+The notebook used to analyze this data is in
+[bmlai_5_1.ipnyb](https://github.com/wrp/bmlai/blob/main/5.1/bmlai_5_1.ipynb)
+
+
+To summarize the results:
+'Carry out & Take away' coupons are the most likely to be accepted,
+while `Bar` coupons are least likely.  Coupons at cheap restaurants are
+likely to be used, as are coupons which will expire in the next day.
+When the weather is sunny, coupons are more likely to be used, and drivers
+that have a friend as a passenger are more likely to use their coupons.
