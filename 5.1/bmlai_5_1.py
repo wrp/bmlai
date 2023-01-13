@@ -46,7 +46,7 @@ The attributes of this data set include:
     -  Number of times that he/she eats at a restaurant with average expense less than \\$20 per
     person: 0, less than 1, 1 to 3, 4 to 8 or greater than 8
     -  Number of times that he/she goes to a bar: 0, less than 1, 1 to 3, 4 to 8 or greater than 8
-    
+
 
 2. Contextual attributes
     - Driving destination: home, work, or no urgent destination
@@ -71,7 +71,7 @@ import numpy as np
 
 """### Problems
 
-Use the prompts below to get started with your data analysis.  
+Use the prompts below to get started with your data analysis.
 
 1. Read in the `coupons.csv` file.
 
@@ -96,8 +96,8 @@ print(data.Bar.value_counts())
 # Drop the 'car' column; it is not documented and contains many null entries
 d = data.drop(axis=1, columns='car')
 
-# Replace nulls with "never" in the columns  Bar, CoffeeHouse, 
-# CarryAway, RestaurantLessThan20, Restaurant20To50   
+# Replace nulls with "never" in the columns  Bar, CoffeeHouse,
+# CarryAway, RestaurantLessThan20, Restaurant20To50
 for col in ['Bar', 'CoffeeHouse', 'CarryAway', 'RestaurantLessThan20', 'Restaurant20To50']:
   d[col].fillna('never', inplace=True)
 
@@ -108,7 +108,7 @@ print("After replacing nulls with 'never' in select columns, we have discarded")
 discarded = len(data) - len(d)
 print("%d rows, and 1 column"%(discarded))
 
-"""4. What proportion of the total observations chose to accept the coupon? 
+"""4. What proportion of the total observations chose to accept the coupon?
 
 
 """
@@ -135,7 +135,7 @@ sns.histplot(d, x='temperature')
 
 """**Investigating the Bar Coupons**
 
-Now, we will lead you through an exploration of just the bar related coupons.  
+Now, we will lead you through an exploration of just the bar related coupons.
 
 1. Create a new `DataFrame` that contains just the bar coupons.
 
@@ -154,7 +154,7 @@ print(f'{accept_rate_percent(b)} of the bar coupons were accepted')  # 41%
 """
 
 b3f = b.loc[b['Bar'].isin(['never', '1~3', 'less1'])]
-b3m = b.loc[b['Bar'].isin(['gt8', '4~8'])]  
+b3m = b.loc[b['Bar'].isin(['gt8', '4~8'])]
 
 
 print(f'Accept rate for those who visited a bar fewer than 3 times a month: {accept_rate_percent(b3f)}')  # 37%
@@ -170,7 +170,7 @@ a = t.loc[~t['age'].isin(['21', 'below21'])]
 print(f'accept rate for drivers over the age of 25 who visit a bar at least once a month:', end=' ')
 print(f'{accept_rate_percent(a)}')
 
-"""5. Use the same process to compare the acceptance rate between drivers who go to bars more than once a month and had passengers that were not a kid and had occupations other than farming, fishing, or forestry. 
+"""5. Use the same process to compare the acceptance rate between drivers who go to bars more than once a month and had passengers that were not a kid and had occupations other than farming, fishing, or forestry.
 
 """
 
@@ -183,7 +183,7 @@ print(f'and whose occupation is not farming, fishing, or forestry: {accept_rate_
 
 - go to bars more than once a month, had passengers that were not a kid, and were not widowed *OR*
 - go to bars more than once a month and are under the age of 30 *OR*
-- go to cheap restaurants more than 4 times a month and income is less than 50K. 
+- go to cheap restaurants more than 4 times a month and income is less than 50K.
 
 
 """
@@ -197,7 +197,7 @@ print(f'Acceptance rate for bar goers under age 30: {accept_rate(a)}')
 
 
 a = d.loc[
-        data.RestaurantLessThan20.isin(['4~8','gt8']) & 
+        data.RestaurantLessThan20.isin(['4~8','gt8']) &
         data.income.isin(['Less than $12500', '$25000 - $37499','$12500 - $24999', '$37500 - $49999'])
 ]
 
@@ -222,7 +222,7 @@ def compute_ratio(s):
   a = accept_rate(x.loc[s])
   b = accept_rate(x.loc[~s])
   return a/b
-  
+
 accept_rates['alone-partnered'] = compute_ratio(x.passanger.isin(['Alone', 'Partner']))
 accept_rates['alone'] = compute_ratio(x.passanger.isin(['Alone']))
 
