@@ -20,6 +20,7 @@ The notebook used to analyze this data is in
 To summarize the results:
 'Carry out & Take away' coupons are the most likely to be accepted,
 while `Bar` coupons are least likely.  Coupons at cheap restaurants are
-likely to be used, as are coupons which will expire in the next day.
-When the weather is sunny, coupons are more likely to be used, and drivers
-that have a friend as a passenger are more likely to use their coupons.
+likely to be accepted, as are coupons which will expire in the next day.
+When the weather is sunny, coupons are more likely to be accepted,
+and drivers that have a friend as a passenger are more likely to accept
+their coupons.
