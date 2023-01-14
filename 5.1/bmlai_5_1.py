@@ -86,12 +86,16 @@ data.sample(10)
 """2. Investigate the dataset for missing or problematic data."""
 
 data.info()
-print(data.CoffeeHouse.value_counts())
-print(data.Restaurant20To50.value_counts())
-print(data.CarryAway.value_counts())
-print(data.Bar.value_counts())
+
+data.CoffeeHouse.value_counts().plot(kind='bar')
 
 """3. Decide what to do about your missing data -- drop, replace, other..."""
+
+data.Restaurant20To50.value_counts().plot(kind='bar')
+
+data.CarryAway.value_counts().plot(kind='bar')
+
+data.Bar.value_counts().plot(kind='bar')
 
 # Drop the 'car' column; it is not documented and contains many null entries
 d = data.drop(axis=1, columns='car')
@@ -126,10 +130,12 @@ print(f'{counts[1]} users ({accept_rate_percent(d)}) accepted the coupon')
 
 """5. Use a bar plot to visualize the `coupon` column."""
 
-print(d.coupon.value_counts())
-sns.countplot(data=d, x='coupon')
+d.coupon.value_counts().plot(kind='bar')
+# sns.countplot(data=d, x='coupon')
+# d.plot.bar(x='coupon')
 
-"""6. Use a histogram to visualize the temperature column."""
+"""
+6. Use a histogram to visualize the temperature column."""
 
 sns.histplot(d, x='temperature')
 
@@ -233,9 +239,18 @@ for col in x.columns:
         except (TypeError, KeyError):
             pass
 
-
+accept_rates.sort_values(ascending=False).head(10).plot(kind='bar')
 print(accept_rates.sort_values(ascending=False).head(5))
 print('...')
 print(accept_rates.sort_values(ascending=False).tail(5))
 
 """From the above, we see that 'Carry out & Take away' coupons are the most likely to be accepted, while `Bar` coupons are least likely.  Coupons at cheap restaurants are likely to be accepted, and coupons with 1day expriations are also likely to be accepted.  When the weather is sunny, coupons are more likely to be accepted."""
+
+# Now, let's examine some other coupon types
+coupon_accept_rate = pd.Series(dtype=float)
+for coupon_type in d.coupon.unique():
+    x  = d.loc[d['coupon'] == coupon_type]
+    print(f'{accept_rate_percent(x)} of the {coupon_type} coupons were accepted')
+    coupon_accept_rate[coupon_type] = accept_rate(x)
+
+coupon_accept_rate.sort_values(ascending=False).plot(kind='bar')
