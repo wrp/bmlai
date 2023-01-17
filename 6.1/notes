@@ -1,2 +1,25 @@
 
+Commands from the notebook in the 2nd video:
+
 from sklearn.datasets import load_boston
+X, _ = load_boston(return_X_y=True)
+X = pd.DataFrame(X)
+X.plot(kind='scatter', x=6, y=7)
+
+# normalize the data
+mu = X.mean()
+sigma = X.std()
+Xnorm = (X - mu)/sigma
+
+
+
+from scipy.linalg import svd
+U, s, Vt = svd(Xnorm, full_matrices=False)
+Sigma = np.diag(s)
+V = Vt.T
+
+U @ Sigma @ V.T  # Should be Xnorm. Check with np.allclose
+np.allclose(Xnorm, U @ Sigma @ V.T)
+
+# Recover original data:
+np.allclose(X, mu + sigma * pd.DataFrame(U @ Sigma @ V.T))
