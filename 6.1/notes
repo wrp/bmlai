@@ -23,3 +23,19 @@ np.allclose(Xnorm, U @ Sigma @ V.T)
 
 # Recover original data:
 np.allclose(X, mu + sigma * pd.DataFrame(U @ Sigma @ V.T))
+
+
+4th video:
+
+r = 4
+Ur = U[:, :r]
+Sigmar = Sigma[:r, :r]
+Xrr = Ur @ Sigmar
+
+# Suppose new_data is a new row for the original data
+# To project it into the normalized basis:
+new_data_normalized = (new_data - mu) / sigma
+new_data_projected = new_data_normalized @ V[:,:r]
+
+# Append new row:
+Xrr.loc[len(Xrr)] = new_data_projected
